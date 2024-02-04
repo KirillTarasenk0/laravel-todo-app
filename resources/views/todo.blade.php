@@ -10,6 +10,6 @@
     <link rel="stylesheet" href="{{ asset("css/styles.css") }}">
 </head>
 <body>
-    <h1 class="title">TODO Laravel app</h1>
+    <x-header/>
 </body>
 </html>
