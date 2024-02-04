@@ -11,5 +11,12 @@
 </head>
 <body>
     <x-header/>
+    <main class="main">
+        <section class="main__section">
+            <div class="item__btn-container">
+                <button class="item__btn">New Item</button>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
