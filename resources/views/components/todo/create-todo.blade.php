@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 sm:px-20 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                <form action="" method="POST">
+                <form action="{{ route('create-todo') }}" method="POST">
                     @csrf
                     <div class="mb-4">
                         <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
@@ -27,9 +27,8 @@
                     <div class="mb-4">
                         <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
                         <select name="status" id="status" class="form-select mt-1 block w-full" required>
-                            <option value="todo">To Do</option>
-                            <option value="in_progress">In Progress</option>
-                            <option value="done">Done</option>
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
                         </select>
                     </div>
                     <div class="flex items-center justify-end mt-4">
