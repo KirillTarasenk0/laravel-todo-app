@@ -20,8 +20,8 @@ class TodoController
         $todoService->createTodo(Auth::id(), $request['title'], $request['description'], $request['due_date'], $request['priority'], $request['status']);
         return redirect()->route('todos-page');
     }
-    public function todosFilter(TodoSortRequest $request): void
+    public function todosFilter(TodoSortRequest $request, TodoService $todoService): View
     {
-        dd($request['sort']);
+        return view('todos', ['todos' => $todoService->filterTodo($request['sort'])]);
     }
 }
