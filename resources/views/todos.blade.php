@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight" style="text-align: center;">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Laravel Todo App') }}
         </h2>
     </x-slot>
@@ -29,7 +29,7 @@
                 </div>
                 @foreach($todos as $todo)
                     <div class="col-md-4" style="flex: 0 0 100%; max-width: 100%; padding: 2rem;">
-                        <div class="card mb-4 shadow-sm" style="margin-bottom: 1.5rem; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); background-color: #edf2f7;">
+                        <div class="card mb-4 shadow-sm" style="margin-bottom: 1.5rem; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); background-color: #edf2f7; position: relative;">
                             <div class="card-header bg-primary text-white" style="background-color: #4299e1; color: #fff; padding: 1rem;">
                                 <h4 class="my-0 font-weight-normal" style="margin: 0; font-weight: 400; font-size: 1.5rem;">{{ $todo->title }}</h4>
                             </div>
@@ -40,6 +40,15 @@
                                     <li style="font-size: 1.25rem;">Due date: {{ $todo->due_date }}</li>
                                     <li style="font-size: 1.25rem;">Status: {{ $todo->status }}</li>
                                 </ul>
+                            </div>
+                            <div style="position: absolute; top: 15px; right: 10px;">
+                                <form action="{{ route('delete-todo') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button value="{{ $todo->id }}" name="delete" type="submit" class="inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 active:bg-red-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">
+                                        Delete
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

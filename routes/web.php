@@ -22,6 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('createTodo', [TodoController::class, 'store'])->name('create-todo');
     Route::get('todos', [TodoController::class, 'index'])->name('todos-page');
     Route::get('filterTodos', [TodoController::class, 'todosFilter'])->name('filter-todos');
+    Route::delete('deleteTodo', [TodoController::class, 'destroy'])->name('delete-todo');
 });
 
 require __DIR__.'/auth.php';

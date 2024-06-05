@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateTodoRequest;
 use App\Services\TodoService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Http\Requests\TodoSortRequest;
@@ -23,5 +24,10 @@ class TodoController
     public function todosFilter(TodoSortRequest $request, TodoService $todoService): View
     {
         return view('todos', ['todos' => $todoService->filterTodo($request['sort'])]);
+    }
+    public function destroy(Request $request, TodoService $todoService): RedirectResponse
+    {
+        $todoService->deleteTodo($request['delete']);
+        return redirect()->route('todos-page');
     }
 }

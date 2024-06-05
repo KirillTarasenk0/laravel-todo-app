@@ -38,4 +38,8 @@ class TodoService
         }
         return $todos;
     }
+    public function deleteTodo(int $deleteTodoId): void
+    {
+        Task::query()->find($deleteTodoId)->delete();
+    }
 }
