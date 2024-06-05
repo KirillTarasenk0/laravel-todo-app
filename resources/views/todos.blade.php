@@ -1,13 +1,32 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight" style="text-align: center;">
             {{ __('Laravel Todo App') }}
         </h2>
     </x-slot>
 
-    <div class="py-12 bg-light">
+    <div class="py-12 bg-light" style="background-color: #edf2f7;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" style="max-width: 70rem; padding: 1.5rem; margin: auto;">
             <div class="row" style="display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px;">
+                <div class="col-md-12" style="flex: 0 0 100%; max-width: 100%; padding: 2rem;">
+                    <form action="{{ route('filter-todos') }}" method="GET" class="form-inline">
+                        @csrf
+                        <label for="sort" class="mr-sm-2">Sort by:</label>
+                        <select name="sort" class="custom-select my-1 mr-sm-2" id="sort">
+                            <option selected>Choose...</option>
+                            <option value="date_asc">Date (Ascending)</option>
+                            <option value="date_desc">Date (Descending)</option>
+                            <option value="low">Priority (Low)</option>
+                            <option value="medium">Priority (Medium)</option>
+                            <option value="high">Priority (High)</option>
+                            <option value="pending">Status (Pending)</option>
+                            <option value="completed">Status (Completed)</option>
+                        </select>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">
+                            Sort
+                        </button>
+                    </form>
+                </div>
                 @foreach($todos as $todo)
                     <div class="col-md-4" style="flex: 0 0 100%; max-width: 100%; padding: 2rem;">
                         <div class="card mb-4 shadow-sm" style="margin-bottom: 1.5rem; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); background-color: #edf2f7;">
