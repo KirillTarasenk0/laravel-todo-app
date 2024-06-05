@@ -3,10 +3,14 @@
 namespace App\Services;
 
 use App\Models\Task;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TodoService
 {
+    public function getTodos(): LengthAwarePaginator
+    {
+        return Task::paginate(10);
+    }
     public function createTodo(int $userId, string $todoTitle, string $todoDescription, string $todoDueDate, string $todoPriority, string $todoStatus): void
     {
         Task::create([

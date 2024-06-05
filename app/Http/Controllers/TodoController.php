@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTodoRequest;
 use App\Services\TodoService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use JetBrains\PhpStorm\NoReturn;
+use Illuminate\View\View;
 
 class TodoController
 {
-    #[NoReturn]
-    public function store(CreateTodoRequest $request, TodoService $todoService): void
+    public function index(TodoService $todoService): View
+    {
+        return view('todos', ['todos' => $todoService->getTodos()]);
+    }
+    public function store(CreateTodoRequest $request, TodoService $todoService): RedirectResponse
     {
         $todoService->createTodo(Auth::id(), $request['title'], $request['description'], $request['due_date'], $request['priority'], $request['status']);
+        return redirect()->route('todos-page');
     }
 }

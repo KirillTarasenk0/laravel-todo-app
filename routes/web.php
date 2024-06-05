@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('createTodo', [TodoController::class, 'store'])->name('create-todo');
+    Route::get('todos', [TodoController::class, 'index'])->name('todos-page');
 });
 
 require __DIR__.'/auth.php';
