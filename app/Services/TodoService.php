@@ -5,12 +5,13 @@ namespace App\Services;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class TodoService
 {
     public function getTodos(): LengthAwarePaginator
     {
-        return Task::paginate(10);
+        return Task::query()->where('user_id', Auth::id())->paginate(10);
     }
     public function createTodo(int $userId, string $todoTitle, string $todoDescription, string $todoDueDate, string $todoPriority, string $todoStatus): void
     {
@@ -27,24 +28,24 @@ class TodoService
     {
         if ($filtrationParameter === 'date_asc' || $filtrationParameter === 'date_desc') {
             $todos = $filtrationParameter === 'date_asc'
-                ? Task::query()->orderBy('due_date', 'asc')->get()
-                : Task::query()->orderBy('due_date', 'desc')->get();
+                ? Task::query()->where('user_id', Auth::id())->orderBy('due_date', 'asc')->get()
+                : Task::query()->where('user_id', Auth::id())->orderBy('due_date', 'desc')->get();
         } else if ($filtrationParameter === 'low' || $filtrationParameter === 'medium' || $filtrationParameter === 'high') {
-            $todos = Task::query()->where('priority', $filtrationParameter)->get();
+            $todos = Task::query()->where('user_id', Auth::id())->where('priority', $filtrationParameter)->get();
         } else if ($filtrationParameter === 'pending' || $filtrationParameter === 'completed') {
-            $todos = Task::query()->where('status', $filtrationParameter)->get();
+            $todos = Task::query()->where('user_id', Auth::id())->where('status', $filtrationParameter)->get();
         } else {
-            $todos = Task::all();
+            $todos = Task::query()->where('user_id', Auth::id())->get();
         }
         return $todos;
     }
     public function deleteTodo(int $deleteTodoId): void
     {
-        Task::query()->find($deleteTodoId)->delete();
+        Task::query()->where('user_id', Auth::id())->find($deleteTodoId)->delete();
     }
     public function updateTodo(int $updateTodoId, string $updateParameter): void
     {
-        $todo = Task::query()->find($updateTodoId);
+        $todo = Task::query()->where('user_id', Auth::id())->find($updateTodoId);
         if ($updateParameter === 'low' || $updateParameter === 'medium' || $updateParameter === 'high') {
             $todo->priority = $updateParameter;
             $todo->save();
@@ -55,7 +56,7 @@ class TodoService
     }
     public function updateTodoDate(int $todoUpdateDateId, string $todoUpdateDueDate): void
     {
-        $todo = Task::query()->find($todoUpdateDateId);
+        $todo = Task::query()->where('user_id', Auth::id())->find($todoUpdateDateId);
         $todo->due_date = $todoUpdateDueDate;
         $todo->save();
     }
