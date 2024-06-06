@@ -50,6 +50,24 @@
                                     </button>
                                 </form>
                             </div>
+                            <div class="col-md-12" style="flex: 0 0 100%; max-width: 100%; padding: 2rem; position: absolute; top: 65px; right: -20px;">
+                                <form action="{{ route('update-todo') }}" method="POST" class="form-inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <label for="sort" class="mr-sm-2">Change to:</label>
+                                    <select name="sort" class="custom-select my-1 mr-sm-2" id="sort">
+                                        <option selected>Choose...</option>
+                                        <option value="low">Priority (Low)</option>
+                                        <option value="medium">Priority (Medium)</option>
+                                        <option value="high">Priority (High)</option>
+                                        <option value="pending">Status (Pending)</option>
+                                        <option value="completed">Status (Completed)</option>
+                                    </select>
+                                    <button value="{{ $todo->id }}" name="change" type="submit" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">
+                                        Change
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @endforeach

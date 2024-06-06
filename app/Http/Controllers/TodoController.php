@@ -30,4 +30,9 @@ class TodoController
         $todoService->deleteTodo($request['delete']);
         return redirect()->route('todos-page');
     }
+    public function update(Request $request, TodoService $todoService): RedirectResponse
+    {
+        $todoService->updateTodo($request['change'], $request['sort']);
+        return redirect()->route('todos-page');
+    }
 }

@@ -42,4 +42,15 @@ class TodoService
     {
         Task::query()->find($deleteTodoId)->delete();
     }
+    public function updateTodo(int $sortTodoId, string $updateParameter): void
+    {
+        $todo = Task::query()->find($sortTodoId);
+        if ($updateParameter === 'low' || $updateParameter === 'medium' || $updateParameter === 'high') {
+            $todo->priority = $updateParameter;
+            $todo->save();
+        } else  {
+            $todo->status = $updateParameter;
+            $todo->save();
+        }
+    }
 }
