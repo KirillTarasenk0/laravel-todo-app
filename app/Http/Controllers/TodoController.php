@@ -35,4 +35,9 @@ class TodoController
         $todoService->updateTodo($request['change'], $request['sort']);
         return redirect()->route('todos-page');
     }
+    public function updateDate(Request $request, TodoService $todoService): RedirectResponse
+    {
+        $todoService->updateTodoDate($request['change'], $request['due_date']);
+        return redirect()->route('todos-page');
+    }
 }

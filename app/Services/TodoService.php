@@ -42,9 +42,9 @@ class TodoService
     {
         Task::query()->find($deleteTodoId)->delete();
     }
-    public function updateTodo(int $sortTodoId, string $updateParameter): void
+    public function updateTodo(int $updateTodoId, string $updateParameter): void
     {
-        $todo = Task::query()->find($sortTodoId);
+        $todo = Task::query()->find($updateTodoId);
         if ($updateParameter === 'low' || $updateParameter === 'medium' || $updateParameter === 'high') {
             $todo->priority = $updateParameter;
             $todo->save();
@@ -52,5 +52,11 @@ class TodoService
             $todo->status = $updateParameter;
             $todo->save();
         }
+    }
+    public function updateTodoDate(int $todoUpdateDateId, string $todoUpdateDueDate): void
+    {
+        $todo = Task::query()->find($todoUpdateDateId);
+        $todo->due_date = $todoUpdateDueDate;
+        $todo->save();
     }
 }
