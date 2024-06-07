@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TodoCreatedMail extends Mailable
+class TodoUpdatedMail extends Mailable
 {
     use Queueable, SerializesModels;
     public function __construct()
@@ -19,13 +19,13 @@ class TodoCreatedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Todo Created Mail',
+            subject: 'Todo Updated Mail',
         );
     }
     public function content(): Content
     {
         return new Content(
-            view: 'mails.todo-created',
+            view: 'mails.todo-updated',
         );
     }
     public function attachments(): array
